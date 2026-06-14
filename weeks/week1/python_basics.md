@@ -229,3 +229,5 @@ print("Python is " + x)
 Output :
 Python is fantastic
 ```
+
+## Operators in Python ##
