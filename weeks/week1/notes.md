@@ -3,14 +3,15 @@
     - Type of the variable is inferred based on the value assigned.
 
 
-```x = 5
+```
+x = 5
 name = "Alex"  
 print(x)
 print(name)
 ```
 
 ### Rules for Naming Variables ###
-To use variables correctly, the following naming rules should be followed:
+To use variables correctly, the following naming rules should be followed
     - Names can contain letters, digits and underscores (_).
     - The first character cannot be a digit.
     - Names are case-sensitive, so myVar and myvar are treated differently.
