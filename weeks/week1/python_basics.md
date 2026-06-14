@@ -1,4 +1,4 @@
-### Variables ##
+## Variables ##
 Variables are used to store data that can be referenced and manipulated during program execution. A variable is essentially a name that is assigned to a value. 
     - Unlike Java and many other languages, Python variables do not require explicit declaration of type.
     - Type of the variable is inferred based on the value assigned.
@@ -15,7 +15,7 @@ Output :
 Alex
 ```
 
-#### Rules for Naming Variables ####
+### Rules for Naming Variables ###
 To use variables correctly, the following naming rules should be followed
     - Names can contain letters, digits and underscores (_).
     - The first character cannot be a digit.
@@ -34,7 +34,7 @@ total_score = 90
 class = 10       # class is a reserved keyword
 user-name = "Doe"  # Contains a hyphen
 ```
-#### Output Variables ####
+### Output Variables ###
 The *print()* function is often used to output variables.
 ```
 x = "Farhan Rahman Farabi"
@@ -72,7 +72,7 @@ Output :
 5 Farhan
 ```
 
-#### Assigning Values to Variables ####
+### Assigning Values to Variables ###
 *** 1. Basic Assignment: Variables are assigned values using the = operator. ***
 ```
 x = 5
@@ -101,7 +101,7 @@ Output :
 1 2.5 Python
 ```
 
-#### Unpack a Collection ####
+### Unpack a Collection ###
 If you have a collection of values in a [list], (tuple) etc. Python allows you to extract the values into variables. This is called unpacking.
 
 ```
@@ -144,7 +144,7 @@ y = Computer
 ```
 Python variables store references to objects, not the actual values themselves. When a variable is reassigned, it starts referencing a new object while the old unreferenced object becomes eligible for garbage collection.
 
-#### Variable Reassignment ####
+### Variable Reassignment ###
 Here we check whether modifying one variable affects another when both initially reference the same object.
 ```
 x = 1
@@ -161,7 +161,7 @@ Output:
 - Initially, both x and y reference the object 1.
 - After y = y + 1, y references a new object 2 while x still references 1, so changing y does not affect x.
 
-#### Deleting a Variable ####
+### Deleting a Variable ###
 *del* keyword is used to delete a variable from memory. After deletion, the variable can no longer be accessed.
 ```
 x = 10
@@ -177,7 +177,7 @@ NameError: name 'x' is not defined
 ```
 *Explanation:* del x deletes the variable x. Accessing x after deletion raises a NameError because the variable no longer exists.
 
-#### Global and Local Variables ####
+### Global and Local Variables ###
 
 Variables store data in memory and scope defines the specific region of a program where a variable is accessible. It dictates the visibility and lifetime of the variable within the source code. Variables are categorized into two primary scopes: Global and Local.
 
