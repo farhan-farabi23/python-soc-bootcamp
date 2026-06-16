@@ -28,3 +28,6 @@ Thumbs.db
 
 #docx
 *.docx
+
+#Text files
+*.txt

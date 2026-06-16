@@ -678,3 +678,470 @@ Name is empty!
 
 ---
 
+## 12. Short Circuit Evaluation
+
+Python uses **short circuit evaluation** with `and` / `or` — it stops evaluating as soon as the result is determined.
+
+### `and` — stops at the first `False`
+If the first operand is `False`, Python skips the second entirely.
+
+```python
+x = 0
+y = 10
+
+print(x and y)    # 0  — x is Falsy, so Python returns x without checking y
+print(y and x)    # 0  — y is Truthy, so Python evaluates x and returns it
+```
+
+### `or` — stops at the first `True`
+If the first operand is `True`, Python skips the second entirely.
+
+```python
+x = 5
+y = 0
+
+print(x or y)     # 5  — x is Truthy, Python returns x without checking y
+print(y or x)     # 5  — y is Falsy, so Python evaluates and returns x
+```
+
+### Practical Use
+```python
+# Safe default value — avoids errors when a variable might be empty
+name = ""
+display = name or "Guest"
+print(display)    # Guest
+
+# Guard check — avoids calling a function if the condition is already False
+user_logged_in = False
+user_logged_in and load_dashboard()   # load_dashboard() is never called
+```
+
+> **Key rule:** `and` returns the first Falsy value (or the last value if all are Truthy). `or` returns the first Truthy value (or the last value if all are Falsy).
+
+---
+
+## 13. Python Lists
+
+A list is an **ordered, mutable** collection that can hold items of any type, including mixed types.
+
+### Creating a List
+```python
+fruits = ["apple", "banana", "cherry"]
+mixed  = [1, "hello", 3.14, True]
+empty  = []
+```
+
+### Indexing & Slicing
+```python
+fruits = ["apple", "banana", "cherry"]
+
+print(fruits[0])      # apple
+print(fruits[-1])     # cherry
+print(fruits[0:2])    # ['apple', 'banana']
+```
+
+### Essential List Methods
+
+| Method | Description |
+|--------|-------------|
+| `append(x)` | Adds `x` to the end |
+| `insert(i, x)` | Inserts `x` at index `i` |
+| `remove(x)` | Removes the first occurrence of `x` |
+| `pop(i)` | Removes & returns item at index `i` (default: last) |
+| `sort()` | Sorts the list in place |
+| `reverse()` | Reverses the list in place |
+| `index(x)` | Returns the index of first occurrence of `x` |
+| `count(x)` | Counts how many times `x` appears |
+| `clear()` | Removes all items |
+
+```python
+nums = [3, 1, 4, 1, 5]
+
+nums.append(9)          # [3, 1, 4, 1, 5, 9]
+nums.insert(0, 0)       # [0, 3, 1, 4, 1, 5, 9]
+nums.remove(1)          # removes first 1 → [0, 3, 4, 1, 5, 9]
+nums.pop()              # removes 9 → [0, 3, 4, 1, 5]
+nums.sort()             # [0, 1, 3, 4, 5]
+nums.reverse()          # [5, 4, 3, 1, 0]
+print(nums.count(1))    # 1
+print(nums.index(3))    # 2
+```
+
+---
+
+## 14. Python Tuples
+
+A tuple is an **ordered, immutable** collection. Once created, its values cannot be changed.
+
+### Creating a Tuple
+```python
+coords  = (10, 20)
+single  = (42,)          # trailing comma required for single-item tuple
+no_paren = 1, 2, 3       # parentheses are optional
+```
+
+### Indexing & Slicing
+```python
+t = ("a", "b", "c", "b")
+
+print(t[0])       # a
+print(t[-1])      # b
+print(t[1:3])     # ('b', 'c')
+```
+
+### Tuple Methods
+Tuples only have two built-in methods because they are immutable.
+
+| Method | Description |
+|--------|-------------|
+| `count(x)` | Counts how many times `x` appears |
+| `index(x)` | Returns the index of the first occurrence of `x` |
+
+```python
+t = (1, 2, 3, 2, 2)
+
+print(t.count(2))    # 3
+print(t.index(3))    # 2
+```
+
+> **When to use a tuple over a list:** Use tuples for data that should not change — coordinates, RGB values, function return pairs. They are faster and safer than lists for fixed data.
+
+---
+
+## 15. Python Sets
+
+A set is an **unordered, unindexed** collection with **no duplicate values**. Useful for membership testing and removing duplicates.
+
+### Creating a Set
+```python
+fruits = {"apple", "banana", "cherry"}
+nums   = {1, 2, 2, 3, 3}    # duplicates are removed automatically
+print(nums)                  # {1, 2, 3}
+
+empty_set = set()            # NOT {} — that creates an empty dict
+```
+
+### Essential Set Methods
+
+| Method | Description |
+|--------|-------------|
+| `add(x)` | Adds element `x` |
+| `remove(x)` | Removes `x` — raises `KeyError` if not found |
+| `discard(x)` | Removes `x` — no error if not found |
+| `union(s)` | Returns all items from both sets |
+| `intersection(s)` | Returns only items in both sets |
+| `difference(s)` | Returns items in this set but not in `s` |
+| `issubset(s)` | Returns `True` if all items exist in `s` |
+
+```python
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+a.add(10)                      # {1, 2, 3, 4, 10}
+a.discard(10)                  # {1, 2, 3, 4}
+
+print(a.union(b))              # {1, 2, 3, 4, 5, 6}
+print(a.intersection(b))       # {3, 4}
+print(a.difference(b))         # {1, 2}
+print({1, 2}.issubset(a))      # True
+```
+
+> **Cybersecurity use:** Sets are great for comparing lists of IPs, finding common/unique entries between logs or scan results.
+
+---
+
+## 16. Python Dictionaries
+
+A dictionary stores data as **key-value pairs**. Keys must be unique and immutable; values can be anything.
+
+### Creating a Dictionary
+```python
+user = {
+    "name": "Farhan",
+    "age": 23,
+    "role": "SOC Analyst"
+}
+```
+
+### Accessing & Modifying
+```python
+print(user["name"])          # Farhan
+user["age"] = 24             # update value
+user["city"] = "Dhaka"       # add new key
+del user["city"]             # delete a key
+```
+
+### Essential Dictionary Methods
+
+| Method | Description |
+|--------|-------------|
+| `get(key)` | Returns value for `key`, or `None` if not found (no error) |
+| `keys()` | Returns all keys |
+| `values()` | Returns all values |
+| `items()` | Returns all key-value pairs as tuples |
+| `update(d)` | Merges another dict `d` into this one |
+| `pop(key)` | Removes and returns the value for `key` |
+| `clear()` | Removes all key-value pairs |
+
+```python
+user = {"name": "Farhan", "age": 23, "role": "SOC Analyst"}
+
+print(user.get("name"))         # Farhan
+print(user.get("email"))        # None  (no KeyError)
+
+print(user.keys())              # dict_keys(['name', 'age', 'role'])
+print(user.values())            # dict_values(['Farhan', 23, 'SOC Analyst'])
+print(user.items())             # dict_items([('name', 'Farhan'), ...])
+
+user.update({"age": 24, "city": "Dhaka"})
+print(user.pop("city"))         # Dhaka — removed from dict
+```
+
+### Looping Through a Dictionary
+```python
+for key, value in user.items():
+    print(f"{key}: {value}")
+
+Output:
+name: Farhan
+age: 24
+role: SOC Analyst
+```
+
+---
+
+## 17. Conditional Statements
+
+Conditional statements let Python make decisions — executing different blocks of code based on whether a condition is `True` or `False`.
+
+### `if` Statement
+```python
+age = 20
+
+if age >= 18:
+    print("You are an adult.")
+
+Output:
+You are an adult.
+```
+
+### `if / else` Statement
+```python
+age = 15
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+Output:
+Minor
+```
+
+### `if / elif / else` Statement
+Use `elif` (else if) to check multiple conditions in order. Python stops at the first `True` condition.
+
+```python
+score = 75
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 70:
+    print("Grade: C")
+else:
+    print("Grade: F")
+
+Output:
+Grade: C
+```
+
+### Nested `if`
+An `if` inside another `if`.
+
+```python
+x = 10
+
+if x > 0:
+    if x > 5:
+        print("x is greater than 5")
+    else:
+        print("x is between 1 and 5")
+
+Output:
+x is greater than 5
+```
+
+### Short-Hand `if` (Ternary Operator)
+A one-line `if / else` for simple assignments.
+
+```python
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)    # Adult
+```
+
+### Logical Operators in Conditions
+
+| Operator | Meaning | Example |
+|----------|---------|---------|
+| `and` | Both conditions must be True | `x > 0 and x < 10` |
+| `or` | At least one condition must be True | `x < 0 or x > 10` |
+| `not` | Reverses the condition | `not x == 5` |
+
+```python
+x = 5
+
+if x > 0 and x < 10:
+    print("x is a single digit positive number")
+
+Output:
+x is a single digit positive number
+```
+
+---
+
+## 18. Python Loops
+
+Loops are used to repeatedly execute a block of code.
+
+---
+
+### `for` Loop
+
+A `for` loop iterates over a sequence (list, tuple, string, range, etc.).
+
+```python
+fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(fruit)
+
+Output:
+apple
+banana
+cherry
+```
+
+**Looping through a string:**
+```python
+for char in "Python":
+    print(char)
+
+Output:
+P
+y
+t
+h
+o
+n
+```
+
+**`range()` function** — generates a sequence of numbers.
+
+| Usage | Generates |
+|-------|-----------|
+| `range(5)` | `0, 1, 2, 3, 4` |
+| `range(2, 6)` | `2, 3, 4, 5` |
+| `range(0, 10, 2)` | `0, 2, 4, 6, 8` |
+
+```python
+for i in range(1, 6):
+    print(i)
+
+Output:
+1
+2
+3
+4
+5
+```
+
+---
+
+### `while` Loop
+
+A `while` loop keeps running as long as its condition is `True`.
+
+```python
+count = 1
+
+while count <= 5:
+    print(count)
+    count += 1
+
+Output:
+1
+2
+3
+4
+5
+```
+
+> **Warning:** Always make sure the condition eventually becomes `False`, or the loop will run forever (infinite loop).
+
+---
+
+### Loop Control Statements
+
+| Statement | Description |
+|-----------|-------------|
+| `break` | Exits the loop immediately |
+| `continue` | Skips the rest of the current iteration and moves to the next |
+| `pass` | Does nothing — used as a placeholder |
+
+**`break` — exit early:**
+```python
+for i in range(1, 10):
+    if i == 5:
+        break
+    print(i)
+
+Output:
+1
+2
+3
+4
+```
+
+**`continue` — skip an iteration:**
+```python
+for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i)
+
+Output:
+1
+2
+4
+5
+```
+
+**`pass` — placeholder (no action):**
+```python
+for i in range(5):
+    pass    # loop runs but does nothing — useful while writing code structure
+```
+
+---
+
+### Nested Loops
+A loop inside another loop. The inner loop completes fully for each iteration of the outer loop.
+
+```python
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i, j)
+
+Output:
+1 1
+1 2
+1 3
+2 1
+...
+```
+
+---
+
